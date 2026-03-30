@@ -41,7 +41,7 @@ class BatteryWidget : AppWidgetProvider() {
 
         // If the broadcast is from our iPad FCM service...
         if (intent.action == "ME_KAVISHDEVAR_IPAD_BATTERY_UPDATED") {
-            // ...ring the doorbell to force a UI redraw!
+            Log.d("IPAD_DEBUG", "5. Widget caught the internal broadcast. Forcing UI redraw now!")
             ServiceManager.getService()?.updateBattery()
         }
     }
