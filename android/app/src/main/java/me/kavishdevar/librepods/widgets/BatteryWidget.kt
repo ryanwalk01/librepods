@@ -15,9 +15,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-package me.kavishdevar.librepods.widgets
 
 @file:OptIn(ExperimentalEncodingApi::class)
+
+package me.kavishdevar.librepods.widgets
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
