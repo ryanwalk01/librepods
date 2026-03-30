@@ -26,6 +26,7 @@ import android.content.Context
 import me.kavishdevar.librepods.services.ServiceManager
 import kotlin.io.encoding.ExperimentalEncodingApi
 import android.content.Intent
+import android.util.Log
 
 class BatteryWidget : AppWidgetProvider() {
     override fun onUpdate(
