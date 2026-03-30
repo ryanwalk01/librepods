@@ -34,4 +34,14 @@ class BatteryWidget : AppWidgetProvider() {
     ) {
         ServiceManager.getService()?.updateBattery()
     }
+
+    override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent) // Critical: keeps native widget functions working
+
+        // If the broadcast is from our iPad FCM service...
+        if (intent.action == "ME_KAVISHDEVAR_IPAD_BATTERY_UPDATED") {
+            // ...ring the doorbell to force a UI redraw!
+            ServiceManager.getService()?.updateBattery()
+        }
+    }
 }

@@ -244,6 +244,7 @@
                     android:tint="@color/white"
                     tools:ignore="HardcodedText" />
                 <ImageView
+                    android:id="@+id/case_icon_image"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:importantForAccessibility="no"

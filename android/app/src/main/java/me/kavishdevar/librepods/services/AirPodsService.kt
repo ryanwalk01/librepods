@@ -1634,6 +1634,20 @@ class AirPodsService : Service(), SharedPreferences.OnSharedPreferenceChangeList
             val openActivityIntent = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             it.setOnClickPendingIntent(R.id.battery_widget, openActivityIntent)
 
+            val refreshIntent = Intent("FORCE_IPAD_REFRESH")
+            val refreshPendingIntent = PendingIntent.getBroadcast(
+                this,
+                0,
+                refreshIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+
+// 2. Attach the broadcast strictly to ALL the case UI elements.
+// Tapping the text, the progress bar, OR the picture itself will trigger the refresh.
+            it.setOnClickPendingIntent(R.id.case_battery_widget, refreshPendingIntent) // The text (e.g., "85%")
+            it.setOnClickPendingIntent(R.id.case_battery_progress, refreshPendingIntent) // The circular progress bar
+            it.setOnClickPendingIntent(R.id.case_icon_image, refreshPendingIntent) // The picture of the case you just named!
+
             val leftBattery =
                 batteryNotification.getBattery().find { it.component == BatteryComponent.LEFT }
             val rightBattery =
@@ -1724,6 +1738,23 @@ class AirPodsService : Service(), SharedPreferences.OnSharedPreferenceChangeList
     @SuppressLint("MissingPermission")
     @OptIn(ExperimentalMaterial3Api::class)
     fun updateBattery() {
+        // If the AirPods are NOT connected to your Android device...
+        if (!isConnectedLocally) {
+            // 1. Grab the latest data from your isolated sidecar
+            val ipadData = me.kavishdevar.ipadbattery.IpadBatteryStorage.getBatteryLevels(this)
+
+            // 2. If valid iPad data exists, overwrite LibrePods' native data tracker
+            if (ipadData.buds != -1) {
+                batteryNotification.setBatteryDirect(
+                    leftLevel = ipadData.buds,
+                    leftCharging = false,
+                    rightLevel = ipadData.buds,
+                    rightCharging = false,
+                    caseLevel = ipadData.caseBattery,
+                    caseCharging = ipadData.caseCharging
+                )
+            }
+        }
         setBatteryMetadata()
         updateBatteryWidget()
         sendBatteryBroadcast()
