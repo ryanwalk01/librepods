@@ -19,8 +19,8 @@ class IpadBatteryUpdateReceiver : BroadcastReceiver() {
             IpadBatteryStorage.saveBatteryLevels(context, buds, caseBattery, caseCharging)
             Log.d("IPAD_DEBUG", "3. Data saved to local storage.")
 
-            val updateIntent = Intent("ME_KAVISHDEVAR_IPAD_BATTERY_UPDATED")
-            updateIntent.setPackage(context.packageName)
+            val updateIntent = Intent(context, me.kavishdevar.librepods.widgets.BatteryWidget::class.java)
+            updateIntent.action = "ME_KAVISHDEVAR_IPAD_BATTERY_UPDATED"
             context.sendBroadcast(updateIntent)
             Log.d("IPAD_DEBUG", "4. Sent broadcast to wake up the widget.")
         }
