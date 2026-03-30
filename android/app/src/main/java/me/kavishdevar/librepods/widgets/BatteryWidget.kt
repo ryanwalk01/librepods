@@ -17,9 +17,9 @@
 */
 import android.content.Intent
 
-@file:OptIn(ExperimentalEncodingApi::class)
-
 package me.kavishdevar.librepods.widgets
+
+@file:OptIn(ExperimentalEncodingApi::class)
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
