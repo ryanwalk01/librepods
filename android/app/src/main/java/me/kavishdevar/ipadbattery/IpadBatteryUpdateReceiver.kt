@@ -12,7 +12,8 @@ class IpadBatteryUpdateReceiver : BroadcastReceiver() {
 
             val buds = intent.getIntExtra("buds", -1)
             val caseBattery = intent.getIntExtra("case", -1)
-            val caseCharging = intent.getBooleanExtra("case_charging", false)
+            val chargingText = intent.getStringExtra("case_charging")
+            val caseCharging = chargingText == "1"
 
             Log.d("IPAD_DEBUG", "2. Data extracted -> Buds: $buds | Case: $caseBattery | Charging: $caseCharging")
 
