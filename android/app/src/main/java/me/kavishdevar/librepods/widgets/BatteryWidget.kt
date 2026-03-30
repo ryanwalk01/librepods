@@ -15,8 +15,6 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-import android.content.Intent
-
 package me.kavishdevar.librepods.widgets
 
 @file:OptIn(ExperimentalEncodingApi::class)
@@ -26,6 +24,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import me.kavishdevar.librepods.services.ServiceManager
 import kotlin.io.encoding.ExperimentalEncodingApi
+import android.content.Intent
 
 class BatteryWidget : AppWidgetProvider() {
     override fun onUpdate(
